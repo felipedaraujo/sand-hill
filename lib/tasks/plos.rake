@@ -4,7 +4,7 @@ require 'json'
 $API_KEY = 'J-79dDhF4Uvx_UUxcJ_R'
 $attrs = ['id', 'title', 'abstract', 'materials_and_methods', 'journal', 'publication_date']
 $checkmark = "\u2713"
-$documents = 101
+$documents = 15001
 $start = 0
 
 desc 'Extract protocols from PLOS'
