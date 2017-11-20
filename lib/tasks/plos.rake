@@ -54,6 +54,7 @@ def params(obj, attrs)
 
   attrs.map do |attr|
     key = attr == 'id' ? :journal_id : attr.to_sym
+    # TODO: Verify if atributes like materials_and_method return multiple elem arrays
     params[key] = obj[attr.to_sym].is_a?(Array) ? obj[attr.to_sym].first : obj[attr.to_sym]
   end
 
