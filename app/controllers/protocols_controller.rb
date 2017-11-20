@@ -3,10 +3,13 @@ class ProtocolsController < ApplicationController
 
   # GET /protocols
   def index
-    search = params[:term].present? ? params[:term] :nil
-
-    @protocols = if search
-      Protocol.search(search)
+    @protocols = if params[:q].present?
+      Protocol.search(
+        params[:q],
+        fields: [:title, :abstract, :materials_and_methods],
+        highlight: true,
+        operator: "or"
+      )
     else
       Protocol.limit(10)
     end
@@ -42,6 +45,7 @@ class ProtocolsController < ApplicationController
   # DELETE /protocols/1
   def destroy
     @protocol.destroy
+    head :no_content
   end
 
   private
