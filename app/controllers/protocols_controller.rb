@@ -14,7 +14,7 @@ class ProtocolsController < ApplicationController
       Protocol.limit(10)
     end
 
-    render json: @protocols
+    render json: @protocols, :methods => :highlights
   end
 
   # GET /protocols/1
@@ -56,6 +56,6 @@ class ProtocolsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def protocol_params
-      params.require(:protocol).permit(:tile, :abstract, :materials_and_methods, :journal, :journal_id, :publication_date)
+      params.require(:protocol).permit(:tile, :abstract, :materials_and_methods, :journal, :journal_id, :publication_date, :highlights)
     end
 end
