@@ -3,15 +3,20 @@ class ProtocolsController < ApplicationController
 
   # GET /protocols
   def index
+    page = params[:page] || 1
+    per_page = 10
+
     @protocols = if params[:q].present?
       Protocol.search(
         params[:q],
         fields: [:title, :abstract, :materials_and_methods],
         highlight: true,
-        operator: "or"
+        operator: "or",
+        page: page,
+        per_page: per_page
       )
     else
-      Protocol.limit(10)
+      Protocol.page(page).per(per_page)
     end
 
     render json: @protocols, :methods => :highlights
